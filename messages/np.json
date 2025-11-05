@@ -18,6 +18,7 @@
   "dashboard": {
     "title": "सनलाइट डायल्स",
     "subtitle": "प्रणाली स्वास्थ्य सूचकहरू",
+    "loading": "सनलाइट डायल्स लोड हुँदै...",
     "postingDelay": "पोस्टिङ ढिलाइ",
     "reversalRate": "उल्टो दर",
     "reconCoverage": "पुनर्मिलन कभरेज",

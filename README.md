@@ -84,7 +84,14 @@ pnpm dev
 
 ## Environment
 
-The application is pre-configured with Supabase credentials in `lib/supabase.ts`
+Copy `.env.example` to `.env.local` and provide your Supabase project credentials before starting the development server:
+
+```bash
+cp .env.example .env.local
+# then edit .env.local with your Supabase URL and anon key
+```
+
+The app will raise a descriptive error during startup if the credentials are missing, preventing silent hydration failures.
 
 ## Philosophy
 

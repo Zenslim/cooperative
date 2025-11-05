@@ -110,10 +110,8 @@ export default function OpenSpendPage() {
 
       // Get current user (for demo, we'll use a mock user ID)
       // In production, this would come from auth.getUser()
-      const mockUserId = '00000000-0000-0000-0000-000000000001';
-
       // Submit spend via edge function
-      const { data, error } = await supabase.functions.invoke('submit-spend', {
+      const { error } = await supabase.functions.invoke('submit-spend', {
         body: {
           proposal_id: proposalId || '00000000-0000-0000-0000-000000000001', // Mock proposal
           amount: parseFloat(amount),
@@ -140,9 +138,10 @@ export default function OpenSpendPage() {
       fetchSpends();
 
       alert('Spend submitted successfully!');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting spend:', error);
-      alert(`Failed to submit spend: ${error.message}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Failed to submit spend: ${message}`);
     } finally {
       setSubmitting(false);
     }

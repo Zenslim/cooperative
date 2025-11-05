@@ -18,6 +18,7 @@
   "dashboard": {
     "title": "Sunlight Dials",
     "subtitle": "System Health Indicators",
+    "loading": "Loading Sunlight Dials...",
     "postingDelay": "Posting Delay",
     "reversalRate": "Reversal Rate",
     "reconCoverage": "Recon Coverage",

@@ -22,12 +22,13 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  let messages;
-  try {
-    messages = await getMessages();
-  } catch (error) {
-    notFound();
-  }
+  // Simple messages object - no external files needed
+  const messages = {
+    welcome: 'Welcome',
+    dashboard: 'Dashboard', 
+    openSpend: 'Open Spend',
+    title: 'Wu-Wei Cooperative OS'
+  };
 
   return (
     <html lang={locale} suppressHydrationWarning>

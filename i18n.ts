@@ -9,13 +9,13 @@ function isLocale(input: string | undefined): input is Locale {
   return !!input && locales.includes(input as Locale);
 }
 
-export default getRequestConfig(async ({ locale, requestLocale }) => {
-  const activeLocale = locale ?? (await requestLocale);
+export default getRequestConfig(async ({ requestLocale }) => {
+  const resolvedLocale = (await requestLocale()) ?? defaultLocale;
 
-  if (!isLocale(activeLocale)) notFound();
+  if (!isLocale(resolvedLocale)) notFound();
 
   return {
-    locale: activeLocale,
-    messages: (await import(`./messages/${activeLocale}.json`)).default
+    locale: resolvedLocale,
+    messages: (await import(`./messages/${resolvedLocale}.json`)).default
   };
 });

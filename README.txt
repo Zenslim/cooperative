@@ -8,10 +8,10 @@ This zip file contains all the updated files to fix:
 - ✅ Next-intl path resolution error
 - ✅ Module not found error
 
-## Updated Files (v4 - Final Working Version):
+## Updated Files (v5 - Import Path Fix):
 
 1. **i18n/request.ts** - Minimal next-intl routing configuration
-2. **next.config.mjs** - Fixed import path and config structure
+2. **next.config.mjs** - Fixed import path (.ts extension) and config structure
 
 ## Files Included:
 
@@ -33,7 +33,7 @@ This zip file contains all the updated files to fix:
    - Navigate to the file path in GitHub
    - Click the "Edit" button (pencil icon)
    - Copy and paste the entire content from the corresponding file
-   - Commit changes with message: "🔧 FIX: Vercel deployment - React hydration & Next.js static rendering errors"
+   - Commit changes with message: "🔧 FIX: Vercel build - Minimal next-intl configuration (v5)"
 
 ### Option 2: Git Push (If you have local repository)
 1. Extract the zip file
@@ -41,7 +41,7 @@ This zip file contains all the updated files to fix:
 3. Run the following commands:
    ```bash
    git add .
-   git commit -m "🔧 FIX: Vercel deployment - React hydration & Next.js static rendering errors"
+   git commit -m "🔧 FIX: Vercel build - Minimal next-intl configuration (v5)"
    git push -f origin main
    ```
 

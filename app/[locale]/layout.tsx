@@ -1,7 +1,8 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { Inter } from 'next/font/google';
-import { routing } from '../../i18n/request';
+import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
+import { routing } from '../../i18n/routing';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import '../globals.css';
 
@@ -22,13 +23,9 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Simple messages object - no external files needed
-  const messages = {
-    welcome: 'Welcome',
-    dashboard: 'Dashboard', 
-    openSpend: 'Open Spend',
-    title: 'Wu-Wei Cooperative OS'
-  };
+  unstable_setRequestLocale(locale);
+
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale} suppressHydrationWarning>

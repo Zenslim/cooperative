@@ -1,5 +1,7 @@
-import { createLocalizedPathnamesNavigation, Pathnames } from 'next-intl/navigation';
+import pkg from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
+
+const { createLocalizedPathnamesNavigation, Pathnames } = pkg;
 
 export const routing = defineRouting({
   locales: ['en', 'np'],

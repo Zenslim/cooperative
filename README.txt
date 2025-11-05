@@ -1,6 +1,13 @@
 # Vercel Deployment Fixes for Wu-Wei Cooperative OS
 
-This zip file contains all the updated files to fix the React hydration errors and Next.js static generation issues causing the blank page on Vercel deployment.
+This zip file contains all the updated files to fix:
+- ✅ React hydration errors causing blank page
+- ✅ Next.js static generation failures  
+- ✅ CommonJS module import syntax error
+
+## Updated Files (v2 - Fixed CommonJS Import):
+
+1. **i18n/request.ts** - Updated to modern next-intl routing API with CommonJS-compatible imports
 
 ## Files Included:
 

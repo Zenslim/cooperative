@@ -1,13 +1,21 @@
-import { getRequestConfig } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import {getRequestConfig} from 'next-intl/server';
+import {notFound} from 'next/navigation';
 
 export const locales = ['en', 'np'] as const;
-export type Locale = typeof locales[number];
+export type Locale = (typeof locales)[number];
+export const defaultLocale: Locale = 'en';
 
-export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as any)) notFound();
+function isLocale(input: string | undefined): input is Locale {
+  return !!input && locales.includes(input as Locale);
+}
+
+export default getRequestConfig(async ({requestLocale, locale}) => {
+  const resolvedLocale = (await requestLocale) ?? locale ?? defaultLocale;
+
+  if (!isLocale(resolvedLocale)) notFound();
 
   return {
-    messages: (await import(`./messages/${locale}.json`)).default
+    locale: resolvedLocale,
+    messages: (await import(`./messages/${resolvedLocale}.json`)).default
   };
 });

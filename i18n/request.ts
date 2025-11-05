@@ -1,22 +1,11 @@
-import pkg from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
-
-const { createLocalizedPathnamesNavigation, Pathnames } = pkg;
 
 export const routing = defineRouting({
   locales: ['en', 'np'],
   defaultLocale: 'en',
   pathnames: {
     '/': '/',
-    '/dashboard': {
-      en: '/dashboard',
-      np: '/dashboard'
-    },
-    '/open-spend': {
-      en: '/open-spend',
-      np: '/open-spend'
-    }
-  } as Pathnames
+    '/dashboard': '/dashboard',
+    '/open-spend': '/open-spend'
+  }
 });
-
-export const { Link, redirect, usePathname, useRouter } = createLocalizedPathnamesNavigation(routing);

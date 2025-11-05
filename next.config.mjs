@@ -1,12 +1,10 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import {routing} from './i18n/request.ts';
+import {routing} from './i18n/request';
 
 const withNextIntl = createNextIntlPlugin(routing);
 
 const nextConfig = {
-  experimental: {
-    trailingSlash: false
-  }
+  trailingSlash: false
 };
 
 export default withNextIntl(nextConfig);

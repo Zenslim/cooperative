@@ -1,37 +1,32 @@
-import { NextIntlClientProvider } from 'next-intl'
-import { notFound } from 'next/navigation'
-import { Inter } from 'next/font/google'
-import ErrorBoundary from '../../components/ErrorBoundary'
-import '../globals.css'
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { Inter } from 'next/font/google';
+import { routing } from '../../i18n/request';
+import ErrorBoundary from '../../components/ErrorBoundary';
+import '../globals.css';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-const locales = ['en', 'np']
-
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ locale }))
-}
-
-export const metadata = {
-  title: 'Wu-Wei Cooperative OS',
-  description: 'Where Life Flows - Transparency-First Cooperative Management System',
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
   children,
   params: { locale }
 }: {
-  children: React.ReactNode
-  params: { locale: string }
+  children: React.ReactNode;
+  params: { locale: string };
 }) {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) notFound()
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
 
-  let messages
+  let messages;
   try {
-    messages = (await import(`../../messages/${locale}.json`)).default
+    messages = await getMessages();
   } catch (error) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -44,5 +39,5 @@ export default async function LocaleLayout({
         </ErrorBoundary>
       </body>
     </html>
-  )
+  );
 }

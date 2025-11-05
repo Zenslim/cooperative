@@ -1,19 +1,12 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import {routing} from './i18n/request.ts';
 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+const withNextIntl = createNextIntlPlugin(routing);
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: {
-      allowedOrigins: ['*']
-    },
-    serverComponentsExternalPackages: ['@supabase/supabase-js']
-  },
-  // Add trailing slash for better routing
-  trailingSlash: true,
-  // Output standalone for better compatibility
-  output: 'standalone'
+    trailingSlash: false
+  }
 };
 
 export default withNextIntl(nextConfig);

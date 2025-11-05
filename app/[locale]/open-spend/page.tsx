@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Upload, Send, AlertCircle, CheckCircle, Clock } from 'lucide-react';
 
+// Force dynamic rendering to avoid static generation issues
+export const dynamic = 'force-dynamic';
+
 interface Spend {
   id: string;
   amount: number;

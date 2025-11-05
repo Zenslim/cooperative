@@ -1,13 +1,20 @@
-import { getRequestConfig } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import { createLocalizedPathnamesNavigation, Pathnames } from 'next-intl/navigation';
+import { defineRouting } from 'next-intl/routing';
 
-export const locales = ['en', 'np'] as const;
-export type Locale = typeof locales[number];
-
-export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as any)) notFound();
-
-  return {
-    messages: (await import(`../messages/${locale}.json`)).default
-  };
+export const routing = defineRouting({
+  locales: ['en', 'np'],
+  defaultLocale: 'en',
+  pathnames: {
+    '/': '/',
+    '/dashboard': {
+      en: '/dashboard',
+      np: '/dashboard'
+    },
+    '/open-spend': {
+      en: '/open-spend',
+      np: '/open-spend'
+    }
+  } as Pathnames
 });
+
+export const { Link, redirect, usePathname, useRouter } = createLocalizedPathnamesNavigation(routing);

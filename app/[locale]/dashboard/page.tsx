@@ -6,6 +6,9 @@ import { Link2, Users, Building2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
+// Force dynamic rendering to avoid static generation issues
+export const dynamic = 'force-dynamic';
+
 interface SunlightMetric {
   posting_delay_avg: number;
   reversal_rate: number;

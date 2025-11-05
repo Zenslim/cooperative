@@ -8,10 +8,10 @@ This zip file contains all the updated files to fix:
 - ✅ Next-intl path resolution error
 - ✅ Module not found error
 
-## Updated Files (v5 - Import Path Fix):
+## Updated Files (v6 - JavaScript Configuration):
 
-1. **i18n/request.ts** - Minimal next-intl routing configuration
-2. **next.config.mjs** - Fixed import path (.ts extension) and config structure
+1. **i18n/request.js** - Converted to .js to resolve TypeScript module type issues
+2. **next.config.mjs** - Updated to use .js file and simplified plugin configuration
 
 ## Files Included:
 
@@ -33,7 +33,7 @@ This zip file contains all the updated files to fix:
    - Navigate to the file path in GitHub
    - Click the "Edit" button (pencil icon)
    - Copy and paste the entire content from the corresponding file
-   - Commit changes with message: "🔧 FIX: Vercel build - Minimal next-intl configuration (v5)"
+   - Commit changes with message: "🔧 FIX: Vercel build - JavaScript configuration (v6)"
 
 ### Option 2: Git Push (If you have local repository)
 1. Extract the zip file
@@ -41,7 +41,7 @@ This zip file contains all the updated files to fix:
 3. Run the following commands:
    ```bash
    git add .
-   git commit -m "🔧 FIX: Vercel build - Minimal next-intl configuration (v5)"
+   git commit -m "🔧 FIX: Vercel build - JavaScript configuration (v6)"
    git push -f origin main
    ```
 

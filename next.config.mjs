@@ -1,7 +1,6 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import {routing} from './i18n/request.ts';
 
-const withNextIntl = createNextIntlPlugin(routing);
+const withNextIntl = createNextIntlPlugin('./i18n/request.js');
 
 const nextConfig = {
   trailingSlash: false

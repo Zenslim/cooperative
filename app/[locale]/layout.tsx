@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { Inter } from 'next/font/google';
-import { routing } from '../../i18n/request';
+import { routing } from '../../i18n/routing';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import '../globals.css';
 
@@ -25,7 +25,7 @@ export default async function LocaleLayout({
   // Simple messages object - no external files needed
   const messages = {
     welcome: 'Welcome',
-    dashboard: 'Dashboard', 
+    dashboard: 'Dashboard',
     openSpend: 'Open Spend',
     title: 'Wu-Wei Cooperative OS'
   };

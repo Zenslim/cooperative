@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { Inter } from 'next/font/google'
+import ErrorBoundary from '../../components/ErrorBoundary'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -34,11 +35,13 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <ErrorBoundary>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )

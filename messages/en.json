@@ -1,0 +1,136 @@
+{
+  "common": {
+    "appName": "Wu-Wei Cooperative OS",
+    "tagline": "Where Life Flows",
+    "language": "Language",
+    "english": "English",
+    "nepali": "नेपाली"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "openSpend": "Open Spend",
+    "proposals": "Proposals",
+    "challenges": "Challenges",
+    "audit": "Audit Trail",
+    "profile": "Profile",
+    "signOut": "Sign Out"
+  },
+  "dashboard": {
+    "title": "Sunlight Dials",
+    "subtitle": "System Health Indicators",
+    "postingDelay": "Posting Delay",
+    "reversalRate": "Reversal Rate",
+    "reconCoverage": "Recon Coverage",
+    "orphanSpends": "Orphan Spends",
+    "challengesResolved": "Challenges Resolved",
+    "equalizedToCommons": "Equalized to Commons",
+    "minutes": "min",
+    "target": "target"
+  },
+  "locks": {
+    "title": "Three Tiny Locks",
+    "proposalSpendLink": "Proposal → Spend Link",
+    "twoPersonRule": "Two-Person Rule",
+    "noPrivatePayees": "No Private Payees",
+    "description": "Physics-based security that makes manipulation pointless"
+  },
+  "spend": {
+    "submitTitle": "Submit New Spend",
+    "feedTitle": "Open-Spend Feed",
+    "amount": "Amount",
+    "vendor": "Vendor",
+    "description": "Description",
+    "category": "Category",
+    "receipt": "Receipt Photo",
+    "proposal": "Link to Proposal",
+    "submit": "Submit Spend",
+    "uploadReceipt": "Upload Receipt",
+    "challenge": "Challenge",
+    "approve": "Approve",
+    "confirm": "Confirm",
+    "status": "Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "challenged": "Challenged",
+    "resolved": "Resolved",
+    "postedBy": "Posted by",
+    "timeAgo": "ago"
+  },
+  "challenge": {
+    "createTitle": "Challenge This Spend",
+    "resolveTitle": "Resolve Challenge",
+    "reason": "Challenge Reason",
+    "resolution": "Resolution",
+    "justify": "Justify",
+    "justifyDesc": "Provide valid reason (urgency, quality, distance)",
+    "equalize": "Equalize",
+    "equalizeDesc": "Pay the difference to the commons",
+    "refund": "Refund",
+    "refundDesc": "Get a shop refund or credit",
+    "improve": "Improve",
+    "improveDesc": "Plan a better bulk buy next time",
+    "submit": "Submit Challenge",
+    "resolve": "Resolve",
+    "amountEqualized": "Amount Equalized",
+    "resolutionDetails": "Resolution Details"
+  },
+  "proposal": {
+    "createTitle": "Create Proposal",
+    "title": "Title",
+    "description": "Description",
+    "estimatedAmount": "Estimated Amount",
+    "category": "Category",
+    "submit": "Submit Proposal",
+    "status": "Status",
+    "draft": "Draft",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "completed": "Completed"
+  },
+  "categories": {
+    "seeds": "Seeds",
+    "fertilizer": "Fertilizer",
+    "equipment": "Equipment",
+    "transport": "Transport",
+    "labor": "Labor",
+    "utilities": "Utilities",
+    "supplies": "Supplies",
+    "other": "Other"
+  },
+  "roles": {
+    "farmer": "Farmer",
+    "storekeeper": "Storekeeper",
+    "ceo": "CEO",
+    "accountant": "Accountant",
+    "investor": "Investor",
+    "auditor": "Auditor",
+    "admin": "Admin"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "role": "Role",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAsRead": "Mark as read",
+    "noNotifications": "No notifications",
+    "spendChallenged": "Your spend has been challenged",
+    "challengeResolved": "Challenge resolved"
+  },
+  "proof": {
+    "title": "Daily Proof Verified",
+    "lastProof": "Last proof",
+    "verificationStatus": "Verification Status",
+    "verified": "Verified",
+    "warning": "Warning",
+    "failed": "Failed",
+    "downloadProof": "Download Proof"
+  }
+}

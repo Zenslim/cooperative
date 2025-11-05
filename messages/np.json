@@ -1,0 +1,136 @@
+{
+  "common": {
+    "appName": "वु-वेइ सहकारी OS",
+    "tagline": "जहाँ जीवन प्रवाह हुन्छ",
+    "language": "भाषा",
+    "english": "English",
+    "nepali": "नेपाली"
+  },
+  "nav": {
+    "dashboard": "ड्यासबोर्ड",
+    "openSpend": "खुल्ला खर्च",
+    "proposals": "प्रस्तावहरू",
+    "challenges": "चुनौतीहरू",
+    "audit": "लेखा परीक्षण ट्रेल",
+    "profile": "प्रोफाइल",
+    "signOut": "साइन आउट"
+  },
+  "dashboard": {
+    "title": "सनलाइट डायल्स",
+    "subtitle": "प्रणाली स्वास्थ्य सूचकहरू",
+    "postingDelay": "पोस्टिङ ढिलाइ",
+    "reversalRate": "उल्टो दर",
+    "reconCoverage": "पुनर्मिलन कभरेज",
+    "orphanSpends": "अनाथ खर्चहरू",
+    "challengesResolved": "चुनौतीहरू समाधान",
+    "equalizedToCommons": "सामान्यमा बराबर",
+    "minutes": "मिनेट",
+    "target": "लक्ष्य"
+  },
+  "locks": {
+    "title": "तीन सानो तालाहरू",
+    "proposalSpendLink": "प्रस्ताव → खर्च लिङ्क",
+    "twoPersonRule": "दुई व्यक्ति नियम",
+    "noPrivatePayees": "कुनै निजी भुक्तानीकर्ता छैन",
+    "description": "भौतिक-आधारित सुरक्षा जसले हेरफेरलाई निरर्थक बनाउँछ"
+  },
+  "spend": {
+    "submitTitle": "नयाँ खर्च पेश गर्नुहोस्",
+    "feedTitle": "खुल्ला-खर्च फिड",
+    "amount": "रकम",
+    "vendor": "विक्रेता",
+    "description": "विवरण",
+    "category": "श्रेणी",
+    "receipt": "रसिद फोटो",
+    "proposal": "प्रस्तावमा लिङ्क",
+    "submit": "खर्च पेश गर्नुहोस्",
+    "uploadReceipt": "रसिद अपलोड गर्नुहोस्",
+    "challenge": "चुनौती",
+    "approve": "स्वीकृत गर्नुहोस्",
+    "confirm": "पुष्टि गर्नुहोस्",
+    "status": "स्थिति",
+    "pending": "पेन्डिङ",
+    "approved": "स्वीकृत",
+    "challenged": "चुनौती दिइएको",
+    "resolved": "समाधान गरिएको",
+    "postedBy": "द्वारा पोस्ट गरिएको",
+    "timeAgo": "अघि"
+  },
+  "challenge": {
+    "createTitle": "यो खर्चलाई चुनौती दिनुहोस्",
+    "resolveTitle": "चुनौती समाधान गर्नुहोस्",
+    "reason": "चुनौती कारण",
+    "resolution": "समाधान",
+    "justify": "औचित्य",
+    "justifyDesc": "वैध कारण प्रदान गर्नुहोस् (अत्यावश्यकता, गुणस्तर, दूरी)",
+    "equalize": "बराबर",
+    "equalizeDesc": "सामान्यमा फरक तिर्नुहोस्",
+    "refund": "फिर्ता",
+    "refundDesc": "पसल फिर्ता वा क्रेडिट प्राप्त गर्नुहोस्",
+    "improve": "सुधार",
+    "improveDesc": "अर्को पटक राम्रो थोक खरिद योजना बनाउनुहोस्",
+    "submit": "चुनौती पेश गर्नुहोस्",
+    "resolve": "समाधान गर्नुहोस्",
+    "amountEqualized": "बराबर गरिएको रकम",
+    "resolutionDetails": "समाधान विवरण"
+  },
+  "proposal": {
+    "createTitle": "प्रस्ताव सिर्जना गर्नुहोस्",
+    "title": "शीर्षक",
+    "description": "विवरण",
+    "estimatedAmount": "अनुमानित रकम",
+    "category": "श्रेणी",
+    "submit": "प्रस्ताव पेश गर्नुहोस्",
+    "status": "स्थिति",
+    "draft": "मस्यौदा",
+    "approved": "स्वीकृत",
+    "rejected": "अस्वीकृत",
+    "completed": "पूर्ण"
+  },
+  "categories": {
+    "seeds": "बीउ",
+    "fertilizer": "मल",
+    "equipment": "उपकरण",
+    "transport": "यातायात",
+    "labor": "श्रम",
+    "utilities": "उपयोगिताहरू",
+    "supplies": "आपूर्तिहरू",
+    "other": "अन्य"
+  },
+  "roles": {
+    "farmer": "किसान",
+    "storekeeper": "भण्डारे",
+    "ceo": "सीईओ",
+    "accountant": "लेखापाल",
+    "investor": "लगानीकर्ता",
+    "auditor": "लेखा परीक्षक",
+    "admin": "प्रशासक"
+  },
+  "auth": {
+    "signIn": "साइन इन",
+    "signUp": "साइन अप",
+    "signOut": "साइन आउट",
+    "email": "इमेल",
+    "password": "पासवर्ड",
+    "fullName": "पूरा नाम",
+    "role": "भूमिका",
+    "noAccount": "खाता छैन?",
+    "haveAccount": "पहिले नै खाता छ?"
+  },
+  "notifications": {
+    "title": "सूचनाहरू",
+    "markAsRead": "पढिएको रूपमा चिन्ह लगाउनुहोस्",
+    "noNotifications": "कुनै सूचना छैन",
+    "spendChallenged": "तपाईंको खर्चलाई चुनौती दिइएको छ",
+    "challengeResolved": "चुनौती समाधान भयो"
+  },
+  "proof": {
+    "title": "दैनिक प्रमाण प्रमाणित",
+    "lastProof": "अन्तिम प्रमाण",
+    "verificationStatus": "प्रमाणीकरण स्थिति",
+    "verified": "प्रमाणित",
+    "warning": "चेतावनी",
+    "failed": "असफल",
+    "downloadProof": "प्रमाण डाउनलोड गर्नुहोस्"
+  }
+}

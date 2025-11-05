@@ -18,6 +18,8 @@
   "dashboard": {
     "title": "Sunlight Dials",
     "subtitle": "System Health Indicators",
+    "loading": "Loading Sunlight Dials...",
+    "configureSupabase": "Connect Supabase to show live metrics. Demo values are displayed until then.",
     "postingDelay": "Posting Delay",
     "reversalRate": "Reversal Rate",
     "reconCoverage": "Recon Coverage",
@@ -45,6 +47,7 @@
     "proposal": "Link to Proposal",
     "submit": "Submit Spend",
     "uploadReceipt": "Upload Receipt",
+    "configureSupabase": "Connect Supabase to enable submissions and live feed updates.",
     "challenge": "Challenge",
     "approve": "Approve",
     "confirm": "Confirm",

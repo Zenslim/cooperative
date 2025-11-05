@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import Header from '../components/Header';
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useCallback, useEffect, useState } from 'react';
+import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase';
 import { Upload, Send, AlertCircle, CheckCircle, Clock } from 'lucide-react';
 
 interface Spend {
@@ -22,6 +22,30 @@ export default function OpenSpendPage() {
   const [spends, setSpends] = useState<Spend[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [configurationMissing, setConfigurationMissing] = useState(!isSupabaseConfigured);
+
+  const supabase = getSupabaseClient();
+
+  const fetchSpends = useCallback(async () => {
+    if (!supabase) {
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('open_spends')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(20);
+
+      if (error) throw error;
+      setSpends(data || []);
+    } catch (error) {
+      console.error('Error fetching spends:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [supabase]);
 
   // Form state
   const [amount, setAmount] = useState('');
@@ -32,6 +56,13 @@ export default function OpenSpendPage() {
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
 
   useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      setConfigurationMissing(true);
+      return;
+    }
+
+    setConfigurationMissing(false);
     fetchSpends();
 
     // Subscribe to real-time updates
@@ -53,27 +84,16 @@ export default function OpenSpendPage() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
-
-  async function fetchSpends() {
-    try {
-      const { data, error } = await supabase
-        .from('open_spends')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(20);
-
-      if (error) throw error;
-      setSpends(data || []);
-    } catch (error) {
-      console.error('Error fetching spends:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  }, [fetchSpends, supabase]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (!supabase) {
+      alert(t('spend.configureSupabase'));
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -110,10 +130,8 @@ export default function OpenSpendPage() {
 
       // Get current user (for demo, we'll use a mock user ID)
       // In production, this would come from auth.getUser()
-      const mockUserId = '00000000-0000-0000-0000-000000000001';
-
       // Submit spend via edge function
-      const { data, error } = await supabase.functions.invoke('submit-spend', {
+      const { error } = await supabase.functions.invoke('submit-spend', {
         body: {
           proposal_id: proposalId || '00000000-0000-0000-0000-000000000001', // Mock proposal
           amount: parseFloat(amount),
@@ -140,9 +158,10 @@ export default function OpenSpendPage() {
       fetchSpends();
 
       alert('Spend submitted successfully!');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting spend:', error);
-      alert(`Failed to submit spend: ${error.message}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Failed to submit spend: ${message}`);
     } finally {
       setSubmitting(false);
     }
@@ -183,6 +202,12 @@ export default function OpenSpendPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-24">
               <h2 className="text-xl font-bold text-gray-900 mb-4">{t('spend.submitTitle')}</h2>
 
+              {configurationMissing && (
+                <div className="mb-4 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+                  {t('spend.configureSupabase')}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -194,6 +219,7 @@ export default function OpenSpendPage() {
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     required
+                    disabled={!supabase}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
@@ -207,6 +233,7 @@ export default function OpenSpendPage() {
                     value={vendor}
                     onChange={(e) => setVendor(e.target.value)}
                     required
+                    disabled={!supabase}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
@@ -218,6 +245,7 @@ export default function OpenSpendPage() {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
+                    disabled={!supabase}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="seeds">{t('categories.seeds')}</option>
@@ -240,6 +268,7 @@ export default function OpenSpendPage() {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                     rows={3}
+                    disabled={!supabase}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
@@ -260,6 +289,7 @@ export default function OpenSpendPage() {
                         type="file"
                         accept="image/*,application/pdf"
                         onChange={(e) => setReceiptFile(e.target.files?.[0] || null)}
+                        disabled={!supabase}
                         className="hidden"
                       />
                     </label>
@@ -268,7 +298,7 @@ export default function OpenSpendPage() {
 
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !supabase}
                   className="w-full bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 >
                   <Send className="w-4 h-4" />

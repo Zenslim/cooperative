@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl';
 import Header from '../components/Header';
 import { Link2, Users, Building2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useCallback, useEffect, useState } from 'react';
+import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase';
 
 interface SunlightMetric {
   posting_delay_avg: number;
@@ -19,12 +19,15 @@ export default function DashboardPage() {
   const t = useTranslations();
   const [metrics, setMetrics] = useState<SunlightMetric | null>(null);
   const [loading, setLoading] = useState(true);
+  const [configurationMissing, setConfigurationMissing] = useState(!isSupabaseConfigured);
 
-  useEffect(() => {
-    fetchMetrics();
-  }, []);
+  const supabase = getSupabaseClient();
 
-  async function fetchMetrics() {
+  const fetchMetrics = useCallback(async () => {
+    if (!supabase) {
+      return;
+    }
+
     try {
       const { data, error } = await supabase
         .from('sunlight_metrics')
@@ -53,7 +56,18 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [supabase]);
+
+  useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      setConfigurationMissing(true);
+      return;
+    }
+
+    setConfigurationMissing(false);
+    fetchMetrics();
+  }, [fetchMetrics, supabase]);
 
   const dials = [
     {
@@ -104,47 +118,57 @@ export default function DashboardPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('dashboard.title')}</h2>
           <p className="text-gray-600 mb-6">{t('dashboard.subtitle')}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dials.map((dial, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <div className="flex flex-col items-center">
-                  <div className="text-sm text-gray-600 mb-2">{dial.label}</div>
-                  <div className="text-3xl font-bold text-gray-900 mb-4">{dial.value}</div>
-                  
-                  <div className="relative w-24 h-24 mb-3">
-                    <svg className="transform -rotate-90 w-24 h-24">
-                      <circle
-                        cx="48"
-                        cy="48"
-                        r="40"
-                        stroke="#F3F4F6"
-                        strokeWidth="8"
-                        fill="none"
-                      />
-                      <circle
-                        cx="48"
-                        cy="48"
-                        r="40"
-                        stroke="#16A34A"
-                        strokeWidth="8"
-                        fill="none"
-                        strokeDasharray={`${2 * Math.PI * 40}`}
-                        strokeDashoffset={`${2 * Math.PI * 40 * (1 - dial.percentage / 100)}`}
-                        className="transition-all duration-1000"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-lg font-semibold text-gray-900">{Math.round(dial.percentage)}%</span>
+          {configurationMissing && (
+            <div className="mb-6 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+              {t('dashboard.configureSupabase')}
+            </div>
+          )}
+
+          {loading ? (
+            <div className="flex justify-center py-10 text-gray-500">{t('dashboard.loading')}</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {dials.map((dial, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div className="flex flex-col items-center">
+                    <div className="text-sm text-gray-600 mb-2">{dial.label}</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-4">{dial.value}</div>
+
+                    <div className="relative w-24 h-24 mb-3">
+                      <svg className="transform -rotate-90 w-24 h-24">
+                        <circle
+                          cx="48"
+                          cy="48"
+                          r="40"
+                          stroke="#F3F4F6"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <circle
+                          cx="48"
+                          cy="48"
+                          r="40"
+                          stroke="#16A34A"
+                          strokeWidth="8"
+                          fill="none"
+                          strokeDasharray={`${2 * Math.PI * 40}`}
+                          strokeDashoffset={`${2 * Math.PI * 40 * (1 - dial.percentage / 100)}`}
+                          className="transition-all duration-1000"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-lg font-semibold text-gray-900">{Math.round(dial.percentage)}%</span>
+                      </div>
+                    </div>
+
+                    <div className="text-xs text-gray-500">
+                      {t('dashboard.target')}: {dial.target}
                     </div>
                   </div>
-                  
-                  <div className="text-xs text-gray-500">
-                    {t('dashboard.target')}: {dial.target}
-                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Three Tiny Locks */}
